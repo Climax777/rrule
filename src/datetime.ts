@@ -174,7 +174,8 @@ export class DateTime extends Time {
       const { div: hourDiv, mod: minuteMod } = divmod(this.minute, 60)
       if (hourDiv) {
         this.minute = minuteMod
-        this.addHours(hourDiv, false, byhour)
+        // Normalize the carry; apply filters at the original minute interval.
+        this.addHours(hourDiv, false, [])
       }
 
       if (
@@ -207,7 +208,8 @@ export class DateTime extends Time {
       const { div: minuteDiv, mod: secondMod } = divmod(this.second, 60)
       if (minuteDiv) {
         this.second = secondMod
-        this.addMinutes(minuteDiv, false, byhour, byminute)
+        // Normalize the carry; apply filters at the original second interval.
+        this.addMinutes(minuteDiv, false, [], [])
       }
 
       if (
